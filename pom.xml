@@ -42,6 +42,22 @@
             <artifactId>jsoup</artifactId>
             <version>1.12.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.199</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.18</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -53,31 +69,49 @@
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
-                <plugin>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>3.0.0</version>
-                    <configuration>
-                        <configLocation>${basedir}/.circleci/checkstyle.xml</configLocation>
-                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                        <enableRulesSummary>false</enableRulesSummary>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>compile</id>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.puppycrawl.tools</groupId>
-                            <artifactId>checkstyle</artifactId>
-                            <version>8.22</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <configLocation>${basedir}/.circleci/checkstyle.xml</configLocation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <enableRulesSummary>false</enableRulesSummary>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>8.22</version>
+                    </dependency>
+                    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>6.0.7</version>
+                <configuration>
+                    <url>jdbc:mysql://localhost:3306/news?serverTimezone=GMT%2B8</url>
+                    <user>root</user>
+                    <password>hkbxp2k3838438</password>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>1.4.199</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 </project>
