@@ -1,5 +1,6 @@
 package com.github.hcsp;
 
+import java.time.Instant;
 import java.util.Date;
 
 public class News {
@@ -7,11 +8,42 @@ public class News {
     private String url;
     private String content;
     private String title;
+    private Instant createdAt;
+    private Instant modifiedAt;
+    public News(){
+
+    }
+
 
     public News(String url, String content, String title) {
         this.url = url;
         this.content = content;
         this.title = title;
+    }
+
+    public News(News old) {
+        this.id = old.id;
+        this.url = old.url;
+        this.content = old.content;
+        this.title = old.title;
+        this.createdAt = old.createdAt;
+        this.modifiedAt = old.modifiedAt;
+    }
+
+    public Instant getCreateAt() {
+        return createdAt;
+    }
+
+    public void setCreateAt(Instant createAt) {
+        this.createdAt = createAt;
+    }
+
+    public Instant getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public void setModifiedAt(Instant modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     public Integer getId() {
